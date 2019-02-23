@@ -3,6 +3,8 @@ import Comments from "./Comments";
 import NewComment from "./NewComment";
 import Login from "./Login";
 import User from "./User";
+import SignUp from "./SignUp";
+import "bootstrap-css-only";
 
 class App extends Component {
   state = {
@@ -11,7 +13,10 @@ class App extends Component {
     isAuth: false,
     isAuthError: false,
     authError: "",
-    user: {}
+    isSignUpError: false,
+    signUpError: "",
+    user: {},
+    userScreen: "login" //signup
   };
 
   // prestar atenção no props de envio / recebimento
@@ -54,6 +59,23 @@ class App extends Component {
     }
   };
 
+  createAccount = async (email, passwd) => {
+    const { auth } = this.props;
+    this.setState({
+      signUpError: "",
+      isSignUpError: false
+    });
+
+    try {
+      await auth.createUserWithEmailAndPassword(email, passwd);
+    } catch (err) {
+      this.setState({
+        signUpError: err.code,
+        isSignUpError: true
+      });
+    }
+  };
+
   componentDidMount() {
     const { database, auth } = this.props;
     this.setState({ isLoading: true });
@@ -66,15 +88,12 @@ class App extends Component {
     });
 
     auth.onAuthStateChanged(user => {
-      console.log("user", user);
       if (user) {
-        console.log("ok user");
         this.setState({
           isAuth: true,
           user
         });
       } else {
-        console.log("falso user");
         this.setState({
           isAuth: false,
           user: {}
@@ -88,17 +107,32 @@ class App extends Component {
     auth.signOut();
   };
 
+  changeScreen = screen => {
+    this.setState({
+      userScreen: screen
+    });
+  };
+
   render() {
     return (
-      <div>
+      <div className="container mt-3">
         {this.state.isAuth && (
           <User email={this.state.user.email} logout={this.logOut} />
         )}
-        {!this.state.isAuth && (
+        {!this.state.isAuth && this.state.userScreen === "login" && (
           <Login
             login={this.login}
             authError={this.state.authError}
             isAuthError={this.state.isAuthError}
+            changeScreen={this.changeScreen}
+          />
+        )}
+        {!this.state.isAuth && this.state.userScreen === "signup" && (
+          <SignUp
+            createAccount={this.createAccount}
+            signUpError={this.state.signUpError}
+            isSignUpError={this.state.isSignUpError}
+            changeScreen={this.changeScreen}
           />
         )}
         {this.state.isAuth && <NewComment sendComment={this.sendComment} />}

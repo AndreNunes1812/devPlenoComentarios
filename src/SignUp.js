@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+class SignUp extends Component {
   state = {
     email: "",
     passwd: ""
@@ -12,19 +12,21 @@ class Login extends Component {
     });
   };
 
-  login = () => {
-    this.props.login(this.state.email, this.state.passwd);
+  createAccount = () => {
+    this.props.createAccount(this.state.email, this.state.passwd);
   };
 
   render() {
     const errorMessages = {
       "auth/wrong-password": "E-mail e/ou senha inválidos",
       "auth/user-not-found": "Usuário não encontrado.",
-      "auth/invalid-email": "E-mail inválido"
+      "auth/invalid-email": "E-mail inválido",
+      "auth/email-already-in-use": "E-mail já está em uso",
+      "auth/weak-password": "Senha muito fraca."
     };
     return (
       <div>
-        <h4>Entre para comentar</h4>
+        <h4>Criar Conta</h4>
         <form className="form-inline">
           <input
             type="text"
@@ -41,29 +43,30 @@ class Login extends Component {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={this.login}
+            onClick={this.createAccount}
           >
-            Entrar
+            Criar conta
           </button>
-
           <button
             className="btn"
-            onClick={() => this.props.changeScreen("signup")}
+            onClick={() => this.props.changeScreen("login")}
           >
-            Criar Conta
+            já tenho uma conta, entrar!
           </button>
         </form>
-        {this.props.isAuthError && (
-          <div className="card text-white bg-danger mt-3">
-            <div className="card-header">Erro ao entrar</div>
-            <div className="card-body">
-              {errorMessages[this.props.authError]}
+        <div>
+          {this.props.isSignUpError && (
+            <div className="card text-white bg-danger mt-3">
+              <div className="card-header">Erro ao criar uma nova conta</div>
+              <div className="card-body">
+                {errorMessages[this.props.signUpError]}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }
 }
 
-export default Login;
+export default SignUp;

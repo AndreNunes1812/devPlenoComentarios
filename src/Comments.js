@@ -2,7 +2,7 @@ import React from "react";
 import Comment from "./Comment";
 
 const Comments = ({ comments }) => {
-  const keys = Object.keys(comments);
+  const keys = Object.keys(comments || []);
 
   return (
     <div>
