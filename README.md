@@ -6,6 +6,6 @@ Esté projeto de estudo faz parte do curso DevReactJS - DevPleno
 
 https://comments-wsinservices.firebaseapp.com/
 
-## Projeto no ar, porem ainda não finalizado, ou seja fazendo modulo do curso e aplicando em produção.
+### Projeto no ar, pórem ainda não finalizado, ou seja fazendo módulo do curso e aplicando em produção.
 
-## A DevPleno, grande Tulio tenho aprendido com suas aulas e lives, tem se mostrado um divisor de aguas.
+### A DevPleno, grande Tulio tenho aprendido com suas aulas e lives, tem se mostrado um divisor de aguas.
