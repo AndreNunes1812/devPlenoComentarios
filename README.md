@@ -10,6 +10,6 @@ https://comments-wsinservices.firebaseapp.com/
 
 ### Nova(s) implementações
 
-#### excluir comentários
+### Excluir comentários
 
-#### Foi implementado o [Bootstrap-css-only] que pode ser encontrado em: (https://www.npmjs.com/package/bootstrap-css-only)
+### Foi implementado o [Bootstrap-css-only] que pode ser encontrado em: (https://www.npmjs.com/package/bootstrap-css-only)
