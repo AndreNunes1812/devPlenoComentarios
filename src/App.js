@@ -16,7 +16,8 @@ class App extends Component {
     isSignUpError: false,
     signUpError: "",
     user: {},
-    userScreen: "login" //signup
+    userScreen: "login", //signup
+    commentsId: ""
   };
 
   // prestar atenção no props de envio / recebimento
@@ -59,6 +60,17 @@ class App extends Component {
     }
   };
 
+  removerComentario = uiid => {
+    console.log("removerComentario:", uiid);
+    const { database } = this.props;
+    try {
+      database.ref("comments/" + uiid).remove();
+      // database.ref("comments/").remove(); esse caso excliu
+    } catch (err) {
+      console.log("error:", err);
+    }
+  };
+
   createAccount = async (email, passwd) => {
     const { auth } = this.props;
     this.setState({
@@ -81,6 +93,9 @@ class App extends Component {
     this.setState({ isLoading: true });
     this.comments = database.ref("comments");
     this.comments.on("value", snapshot => {
+      //   console.log("camino:", Object.keys(snapshot.val()));
+      console.log("caminho:", snapshot.val());
+      // Object.keys(this.props.decks).map((id) => this.props.decks[id])}
       this.setState({
         comments: snapshot.val(),
         isLoading: false
@@ -136,7 +151,10 @@ class App extends Component {
           />
         )}
         {this.state.isAuth && <NewComment sendComment={this.sendComment} />}
-        <Comments comments={this.state.comments} />
+        <Comments
+          comments={this.state.comments}
+          removerComentario={this.removerComentario}
+        />
         {this.state.isLoading && <p>Carregando...</p>}
       </div>
     );

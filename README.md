@@ -6,6 +6,10 @@ Esté projeto de estudo faz parte do curso DevReactJS - [Devpleno](https://www.d
 
 https://comments-wsinservices.firebaseapp.com/
 
-### Projeto no ar, pórem ainda não finalizado, ou seja fazendo módulo do curso e aplicando em produção.
-
 ### A DevPleno, grande Tulio tenho aprendido com suas aulas e lives, tem se mostrado um divisor de aguas.
+
+### Nova(s) implementações
+
+#### excluir comentários
+
+#### Foi implementado o [Bootstrap-css-only] que pode ser encontrado em: (https://www.npmjs.com/package/bootstrap-css-only)
